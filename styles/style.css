@@ -1,0 +1,212 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.leaflet-container {
+  background: #ffffff;
+}
+
+#map {
+  width: 100vw;
+  height: 100vh;
+}
+
+.popup-title,
+.percentage {
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.popup-text {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.leaflet-popup-content {
+  max-width: 200px;
+}
+
+.leaflet-pseudo-fullscreen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 10px;
+  z-index: 99999;
+}
+
+.leaflet-control-zoom-fullscreen {
+  background-image: url(../images/icon-fullscreen.png);
+}
+
+.leaflet-retina.leaflet-control-zoom-fullscreen {
+  background-image: url(../images/icon-fullscreen-2x.png);
+  background-size: 26px 26px;
+}
+
+.leaflet-control-zoom {
+  border-bottom: 1px solid #ccc;
+}
+
+.easy-button-container {
+  line-height: 30px !important;
+}
+
+/*center the icon on the button*/
+.easy-button-button {
+  padding-left: 2px;
+  padding-top: 2px;
+}
+
+.info {
+  padding: 6px 8px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.legend {
+  line-height: 24px;
+}
+
+.legend i {
+  float: left;
+  width: 30px;
+  height: 18px;
+  margin-right: 10px;
+  opacity: 1;
+  background: #ffffff;
+  border: 1px solid #636363;
+}
+
+.tooltip-text {
+  margin: 0px 0px 0px 0px;
+}
+
+.leaflet-control-layers-expanded {
+  color: #000000;
+}
+
+.labels-zipcode {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 9px;
+  line-height: 0.8em;
+}
+
+/* SWITCH MENU */
+#switch-menu {
+  position: relative;
+  top: 2px;
+  left: 10px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+  z-index: 800;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #434343;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #434343;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+.slider.round {
+  border-radius: 17px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.popup-clinic {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.popup-clinic-hide {
+  display: none;
+}
+
+/* SEARCH MENU */
+#search-menu {
+  position: relative;
+  box-sizing: border-box;
+  top: 10px;
+  left: 55px;
+  z-index: 1000;
+}
+
+#search-state {
+  width: 220px;
+  height: 100px;
+  float: left;
+}
+
+#search-zip-code {
+  width: 260px;
+  height: 100px;
+  float: left;
+}
+
+.leaflet-control-search,
+.search-exp {
+  margin: 0 !important;
+}
+
+#drop-down {
+  position: relative;
+  float: left;
+  width: auto;
+  height: auto;
+  box-sizing: border-box;
+  z-index: 1000;
+}
