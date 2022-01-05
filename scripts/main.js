@@ -20,7 +20,7 @@ map.setView([startLatitude, startLongitude], startZoom);
 let mapZoomLevel = map.getZoom();
 
 map.attributionControl.addAttribution(
-  '<a href="https://github.com/stefan-nicolescu">Stefan Nicolescu</a>'
+  '<a href="https://dentalimplantmachine.com/">Dental Implant Machine</a>'
 );
 
 L.control
