@@ -359,7 +359,7 @@ function addVectorTile() {
   let zipCodesPolygonsObjects = [];
 
   let linkGoogleSheets =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQA5-dJH9VlYZaGHvY286Tsjty8MxYc2d29O2icz9ZajtbbzHZC9EOXwmtT1gtZF29ubT4TBiZaf0WV/pub?output=csv";
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vT2dTqRYnj0S5mUSKdVO3h7jX5D0LuNCEeg8ghZg9_KJwUhfpH9RciFsvv1W4pPd1910lh6OXM9Fk2I/pub?gid=486771173&single=true&output=csv";
 
   Papa.parse(linkGoogleSheets, {
     download: true,
