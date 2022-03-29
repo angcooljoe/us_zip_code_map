@@ -358,53 +358,72 @@ function otherMapFeaures() {
 function addVectorTile() {
   let zipCodesPolygonsObjects = [];
 
-  let linkGoogleSheets = "https://data.localdentalimplants.dentist/leads/zip_code.php";
+  let linkGoogleSheets = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT2dTqRYnj0S5mUSKdVO3h7jX5D0LuNCEeg8ghZg9_KJwUhfpH9RciFsvv1W4pPd1910lh6OXM9Fk2I/pub?gid=486771173&single=true&output=csv";
 
-  $.ajax({
-    url: linkGoogleSheets,
-    dataType: "json",
-    success: (results) => {
-      let GoogleSheetsData = results;
-      console.log(GoogleSheetsData)
+  Papa.parse(linkGoogleSheets, {
+    download: true,
+    header: true,
+    skipEmptyLines: true,
+    complete: function (results) {
+      let GoogleSheetsData = results.data;
+
       GoogleSheetsData.map(i => {
-        clinicNames.push(i["clinic_name"]);
 
-        let newZipCode = {
-          arcs: JSON.parse(i["geometry"]),
-          type: i["geometry"].includes("[[[") ? "MultiPolygon" : "Polygon",
-          properties: {
-            unique_id: parseInt(i["unique_id"]),
-            ZCTA5CE10: i["zip_number"].padStart(5, "0"),
-            zip_numbers: parseInt(i["zip_number"]),
-            status: i["status"],
-            clinic: i["clinic_name"],
-            lat_centroid: i["latitude_centroid"],
-            lng_centroid: i["longitude_centroid"],
-            population: i["population"],
-            median_income: i["Median Household Income In The Past 12 Months"],
-          },
-        };
-        zipCodesPolygonsObjects.push(newZipCode);
+            //console.log("I", parseFloat(i["latitude_centroid"]), parseFloat(i["longitude_centroid"]))
+            clinicNames.push(i["clinic_name"]);
 
-        let newZipCodePoint = {
-          type: "Feature",
-          properties: {
-            unique_id: parseInt(i["unique_id"]),
-            ZCTA5CE10: i["zip_number"].padStart(5, "0"),
-            zip_numbers: parseInt(i["zip_number"]),
-            status: i["status"],
-            clinic: i["clinic_name"],
-          },
-          geometry: {
-            type: "Point",
-            coordinates: [
-              parseFloat(i["longitude_centroid"]),
-              parseFloat(i["latitude_centroid"]),
-            ],
-          },
-        };
-        zipCodeCentroids["features"].push(newZipCodePoint);
+            try {
+                JSON.parse(i["geometry"]); //$.parseJSON(i["geometry"])
+
+                  if( !isNaN(parseFloat(i["latitude_centroid"])) &&  !isNaN(parseFloat(i["longitude_centroid"]))){
+                    newZipCode = {
+                      arcs: $.parseJSON(i["geometry"]),
+                      type: i["geometry"].includes("[[[") ? "MultiPolygon" : "Polygon",
+                      properties: {
+                        unique_id: parseInt(i["unique_id"]),
+                        ZCTA5CE10: i["zip_number"].padStart(5, "0"),
+                        zip_numbers: parseInt(i["zip_number"]),
+                        status: i["status"],
+                        clinic: i["clinic_name"],
+                        lat_centroid: parseFloat(i["latitude_centroid"]),
+                        lng_centroid: parseFloat(i["longitude_centroid"]),
+                        population: i["population"],
+                        median_income: i["Median Household Income In The Past 12 Months"],
+                      },
+                    };
+                    zipCodesPolygonsObjects.push(newZipCode);
+
+                    let newZipCodePoint = {
+                      type: "Feature",
+                      properties: {
+                        unique_id: parseInt(i["unique_id"]),
+                        ZCTA5CE10: i["zip_number"].padStart(5, "0"),
+                        zip_numbers: parseInt(i["zip_number"]),
+                        status: i["status"],
+                        clinic: i["clinic_name"],
+                      },
+                      geometry: {
+                        type: "Point",
+                        coordinates: [
+                          parseFloat(i["longitude_centroid"]),
+                          parseFloat(i["latitude_centroid"]),
+                        ],
+                      },
+                    };
+                    zipCodeCentroids["features"].push(newZipCodePoint);
+                  }else{
+                    return false;
+                  }
+
+
+                
+            } catch (e) {
+                return false;
+            }
+
       });
+
+
       zipCodesPolygonsBase["objects"]["zip_code_polygons"]["geometries"] =
         zipCodesPolygonsObjects;
 
@@ -448,18 +467,8 @@ function addVectorTile() {
         newOption.value = i;
         selectClinic.appendChild(newOption);
       });
-    }
-
+    },
   });
-   
-//Papa.parse(linkGoogleSheets, {
-//   download: true,
-//   header: true,
-//   skipEmptyLines: true,
-//   complete: function (results) {
-      
-//  }
-//});
 }
 
 addVectorTile();
