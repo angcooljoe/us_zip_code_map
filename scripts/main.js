@@ -365,8 +365,8 @@ function addVectorTile() {
     dataType: "json",
     success: (results) => {
       let GoogleSheetsData = results;
-
-      GoogleSheetsData.forEach((i) => {
+      console.log(GoogleSheetsData)
+      GoogleSheetsData.map(i => {
         clinicNames.push(i["clinic_name"]);
 
         let newZipCode = {
