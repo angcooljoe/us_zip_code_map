@@ -360,12 +360,11 @@ function addVectorTile() {
 
   let linkGoogleSheets = "https://data.localdentalimplants.dentist/leads/zip_code.php";
 
-  Papa.parse(linkGoogleSheets, {
-    download: true,
-    header: true,
-    skipEmptyLines: true,
-    complete: function (results) {
-      let GoogleSheetsData = results.data;
+  $.ajax({
+    url: linkGoogleSheets,
+    dataType: "json",
+    success: (results) => {
+      let GoogleSheetsData = results;
 
       GoogleSheetsData.forEach((i) => {
         clinicNames.push(i["clinic_name"]);
@@ -449,8 +448,18 @@ function addVectorTile() {
         newOption.value = i;
         selectClinic.appendChild(newOption);
       });
-    },
+    }
+
   });
+   
+//Papa.parse(linkGoogleSheets, {
+//   download: true,
+//   header: true,
+//   skipEmptyLines: true,
+//   complete: function (results) {
+      
+//  }
+//});
 }
 
 addVectorTile();
